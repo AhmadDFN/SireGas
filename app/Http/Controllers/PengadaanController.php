@@ -8,6 +8,9 @@ use App\Http\Requests\UpdatePengadaanRequest;
 
 class PengadaanController extends Controller
 {
+    protected $index = 'pengadaan.index';
+    protected $route = 'pengadaan.';
+    protected $view = 'pengadaan.';
     /**
      * Display a listing of the resource.
      */

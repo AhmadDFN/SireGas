@@ -8,6 +8,9 @@ use App\Http\Requests\UpdateProdukRequest;
 
 class ProdukController extends Controller
 {
+    protected $index = 'produk.index';
+    protected $route = 'produk.';
+    protected $view = 'produk.';
     /**
      * Display a listing of the resource.
      */

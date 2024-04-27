@@ -8,12 +8,22 @@ use App\Http\Requests\UpdatePelangganRequest;
 
 class PelangganController extends Controller
 {
+    protected $index = 'pelanggan.index';
+    protected $route = 'pelanggan.';
+    protected $view = 'pelanggan.';
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data = [
+            "title" => "Pelanggan",
+            'page' => 'Data Pelanggan',
+            "pelanggans" => Pelanggan::All(),
+            'add' => $this->route . "create",
+            'index' => $this->route,
+        ];
+        return view($this->view . "data", $data);
     }
 
     /**
@@ -21,7 +31,15 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            "title" => "Pelanggan",
+            'page' => 'Tambah Pelanggan',
+            'save' => $this->route . "store",
+            'index' => $this->route,
+            // 'is_update' => false,
+        ];
+
+        return view($this->view . "form", $data);
     }
 
     /**

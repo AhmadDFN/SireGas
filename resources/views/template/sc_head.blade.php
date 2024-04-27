@@ -1,5 +1,5 @@
 <!-- Favicon -->
-<link href="{{ asset('dashmin/img/gasweb.ico') }}" rel="icon">
+<link href="{{ asset('dashmin/img/Logo.png') }}" rel="icon">
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,3 +19,33 @@
 
 <!-- Template Stylesheet -->
 <link href="{{ asset('dashmin/css/style.css') }}" rel="stylesheet">
+
+<style>
+    #toast-container {
+        position: fixed;
+        top: 50px;
+        /* Atur posisi vertikal sesuai kebutuhan */
+        left: 50%;
+        /* Pusatkan secara horizontal */
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+    .toast {
+        background-color: #28a745;
+        /* Warna latar hijau */
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        position: relative;
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+    }
+
+    .toast.show {
+        opacity: 1;
+        transition: opacity 0.3s ease-in;
+    }
+</style>

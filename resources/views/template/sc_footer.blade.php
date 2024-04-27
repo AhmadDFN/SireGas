@@ -15,3 +15,24 @@
 
 <!-- Template Javascript -->
 <script src="{{ asset('dashmin/js/main.js') }}"></script>
+
+<script>
+    function showToast(message, isSuccess) {
+        var toastClass = isSuccess ? 'success' : 'error';
+        var toast = $('<div class="toast ' + toastClass + '">' + message + '</div>');
+        $('#toast-container').append(toast);
+        setTimeout(function() {
+            toast.addClass('show');
+        }, 100);
+        setTimeout(function() {
+            toast.removeClass('show');
+            setTimeout(function() {
+                toast.remove();
+            }, 300);
+        }, 3000); // Sesuaikan durasi tampilan pesan di sini
+    }
+
+    // Contoh pemanggilan
+    showToast('Login Berhasil !! - Selamat Datang di SireGas', true); // Untuk notifikasi berhasil
+    // showToast('Login gagal. Kata sandi yang Anda masukkan salah.', false); // Untuk notifikasi gagal
+</script>

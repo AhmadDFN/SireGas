@@ -2,18 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pelanggan;
 use App\Models\Transaksi;
 use App\Http\Requests\StoreTransaksiRequest;
 use App\Http\Requests\UpdateTransaksiRequest;
 
 class TransaksiController extends Controller
 {
+
+    protected $index = 'transaksi.index';
+    protected $route = 'transaksi.';
+    protected $view = 'transaksi.';
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data = [
+            "title" => "Transaksi",
+            'page' => 'Data Transaksi',
+            "pelanggans" => Pelanggan::All(),
+            'transaksis' => Transaksi::All(),
+            'add' => $this->route . "create",
+            'index' => $this->route,
+        ];
+        return view($this->view . "data", $data);
     }
 
     /**
@@ -21,7 +35,15 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            "title" => "Transaksi",
+            'page' => 'Tambah Transaksi',
+            'save' => $this->route . "store",
+            'index' => $this->route,
+            // 'is_update' => false,
+        ];
+
+        return view($this->view . "form", $data);
     }
 
     /**
@@ -29,7 +51,8 @@ class TransaksiController extends Controller
      */
     public function store(StoreTransaksiRequest $request)
     {
-        //
+        Transaksi::create($request->all());
+        return redirect()->route($this->index);
     }
 
     /**
@@ -45,7 +68,15 @@ class TransaksiController extends Controller
      */
     public function edit(Transaksi $transaksi)
     {
-        //
+        $data = [
+            "title" => "Transaksi",
+            'page' => 'Edit Data Transaksi',
+            'transaksi' => $transaksi,
+            'save' => $this->route . "update",
+            'index' => $this->route,
+            'is_update' => true,
+        ];
+        return view($this->view . "form", $data);
     }
 
     /**
@@ -53,7 +84,9 @@ class TransaksiController extends Controller
      */
     public function update(UpdateTransaksiRequest $request, Transaksi $transaksi)
     {
-        //
+        $transaksi->fill($request->all());
+        $transaksi->save();
+        return redirect()->route($this->index);
     }
 
     /**
@@ -61,6 +94,7 @@ class TransaksiController extends Controller
      */
     public function destroy(Transaksi $transaksi)
     {
-        //
+        $transaksi->delete();
+        return redirect()->route($this->index);
     }
 }

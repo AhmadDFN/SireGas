@@ -1,5 +1,8 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+    @if (Session::has('success'))
+        <div id="toast-container"></div>
+    @endif
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
     </a>
@@ -16,7 +19,9 @@
                     <img class="rounded-circle me-lg-2"
                         src="https://ui-avatars.com/api/?name={{ @Auth::user()->username }}&background=007BFF&color=FFF"
                         alt="{{ @Auth::user()->username }}" style="width: 40px; height: 40px;">
-                    <span class="d-none d-lg-inline-flex">{{ @Auth::user()->username }}</span>
+                    <span class="d-none d-lg-inline-flex"
+                        style="text-transform: uppercase;
+                    ">{{ @Auth::user()->username }}</span>
                 @else
                     <img class="rounded-circle me-lg-2"
                         src="https://ui-avatars.com/api/?name=Admin&background=007BFF&color=FFF" alt="Jhon Doe"

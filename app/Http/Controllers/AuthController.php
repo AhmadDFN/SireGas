@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -28,6 +29,8 @@ class AuthController extends Controller
         // Coba melakukan otentikasi
         if (Auth::attempt($credentials)) {
             // Jika berhasil, arahkan ke halaman beranda
+            // return redirect()->route('dashboard');
+            Session::flash('success', 'Login berhasil!');
             return redirect()->route('dashboard');
         } else {
             // Jika gagal, arahkan kembali dengan pesan error

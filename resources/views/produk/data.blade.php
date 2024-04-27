@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (@$transaksis as $item)
+                        @foreach ($transaksis as $item)
                             <tr>
                                 <th scope="row">1</th>
                                 <td>John</td>

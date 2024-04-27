@@ -29,6 +29,36 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('dashmin/css/style.css') }}" rel="stylesheet">
+
+    <style>
+        #toast-container {
+            position: fixed;
+            top: 50px;
+            /* Atur posisi vertikal sesuai kebutuhan */
+            left: 50%;
+            /* Pusatkan secara horizontal */
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .toast {
+            background-color: #dc3545;
+            /* Warna latar merah */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transition: opacity 0.3s ease-in;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,12 +75,18 @@
 
         <!-- Sign In Start -->
         <div class="container-fluid">
+            @if ($errors->has('username'))
+                <div id="toast-container"></div>
+            @endif
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>SireGas</h3>
+                            <a href="{{ url('auth/login') }}" class="">
+                                <h3 class="text-primary"><img class="rounded-circle"
+                                        src="{{ asset('dashmin/img/Logo.png') }}" alt="SireGas"
+                                        style="width: 50px; height: 50px;margin-right: 10px;margin-top:-5px;">SireGas
+                                </h3>
                             </a>
                             <h3>Log In</h3>
                         </div>
@@ -88,6 +124,8 @@
         <!-- Sign In End -->
     </div>
 
+
+
     <!-- JavaScript Libraries -->
 
     {{--  NPM  --}}
@@ -105,6 +143,25 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('dashmin/js/main.js') }}"></script>
+
+    <script>
+        function showToast(message) {
+            var toast = $('<div class="toast">' + message + '</div>');
+            $('#toast-container').append(toast);
+            setTimeout(function() {
+                toast.addClass('show');
+            }, 100);
+            setTimeout(function() {
+                toast.removeClass('show');
+                setTimeout(function() {
+                    toast.remove();
+                }, 300);
+            }, 3000); // Sesuaikan durasi tampilan pesan di sini
+        }
+
+        // Contoh pemanggilan
+        showToast('Login gagal. Username Atau Password Kamu Mungkin salah !!!.');
+    </script>
 
 </body>
 

@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_transaksi');
             $table->unsignedBigInteger('id_produk');
-            $table->integer('jumlah');
-            $table->integer('subtotal');
+            $table->decimal('jumlah', 10, 2);
+            $table->decimal('harga', 10, 2);
+            $table->decimal('total_harga', 10, 2);
             $table->timestamps();
 
-            // Definisi foreign key
             $table->foreign('id_transaksi')->references('id')->on('transaksis')->onDelete('cascade');
             $table->foreign('id_produk')->references('id')->on('produks');
         });

@@ -17,28 +17,36 @@
         <!-- Spinner Start -->
         <div id="spinner"
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <img src="{{ asset('dashmin/img/Logo.png') }}" alt="SireGas"
+                class="position-fixed translate-middle w-100 vh-100 top-50 start-50" style="opacity: 0.7;">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
         <!-- Spinner End -->
 
-
         @include('template.sidebar')
+        @if (session('mess'))
+            <div class="col-sm-4">
+                <div class="d-flex align-items-center justify-content-between p-4">
+                    {{-- Notif --}}
+                    <div class="alert alert-{{ session('type') }} text-center" style="width: 300px;" role="alert">
+                        {{ session('mess') }}
+                    </div>
+                </div>
+            </div>
+        @endif
 
 
         <!-- Content Start -->
         <div class="content">
             @include('template.navbar')
 
-
-            <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4" style="min-height: 75vh">
                 <div class="row g-4">
-
+                    @yield('content')
                 </div>
             </div>
-            <!-- Sale & Revenue End -->
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4" style="padding-right: 50px !important;">

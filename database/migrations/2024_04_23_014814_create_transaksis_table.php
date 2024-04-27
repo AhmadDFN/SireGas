@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->date("tanggal_transaksi");
-            $table->integer("total_harga");
-            $table->enum("pembayaran", ["cash", "hutang", "campur"]);
+            $table->date('tanggal_transaksi');
+            $table->unsignedBigInteger('id_pelanggan')->nullable();
+            $table->integer('total_harga', 10, 2);
+            $table->enum("pembayaran", ["Cash", "Hutang", "Campur"]);
+            $table->text('catatan')->nullable();
             $table->timestamps();
+
+            $table->foreign('id_pelanggan')->references('id')->on('pelanggans')->onDelete('set null');
         });
     }
 

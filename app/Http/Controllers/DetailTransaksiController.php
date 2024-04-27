@@ -8,6 +8,9 @@ use App\Http\Requests\UpdatedetailTransaksiRequest;
 
 class DetailTransaksiController extends Controller
 {
+    protected $index = 'detailTransaksi.index';
+    protected $route = 'detailTransaksi.';
+    protected $view = 'detailTransaksi.';
     /**
      * Display a listing of the resource.
      */
