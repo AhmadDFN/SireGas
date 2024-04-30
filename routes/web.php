@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\HutangController;
 use App\Http\Controllers\PelangganController;
@@ -21,9 +22,7 @@ Route::get("/test", [TransaksiController::class, "test"]);
 
 Route::group(["middleware" => "isLogin"], function () {
 
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, "index"])->name("dashboard");
 
     Route::resource('detailtransaksi', DetailTransaksiController::class);
     Route::resource('hutang', HutangController::class);
