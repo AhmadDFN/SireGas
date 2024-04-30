@@ -20,8 +20,8 @@ return new class extends Migration
             $table->decimal('detail_total_harga', 10, 2);
             $table->timestamps();
 
-            $table->foreign('id_transaksi')->references('id')->on('transaksis')->onDelete('cascade');
-            $table->foreign('id_produk')->references('id')->on('produks');
+            $table->foreign('detail_id_transaksi')->references('id')->on('transaksis')->onDelete('cascade');
+            $table->foreign('detail_id_produk')->references('id')->on('produks');
         });
     }
 

@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_hutang');
-            $table->foreign('id_hutang')->references('id')->on('hutangs');
+            $table->unsignedBigInteger('pembayaran_id_hutang');
             $table->integer('jumlah_pembayaran');
             $table->date('tanggal_pembayaran');
             $table->timestamps();
+
+            $table->foreign('pembayaran_id_hutang')->references('id')->on('hutangs');
         });
     }
 

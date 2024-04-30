@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string("trans_nota");
             $table->date('trans_tanggal');
             $table->unsignedBigInteger('trans_id_pelanggan')->nullable();
-            $table->integer('trans_gtotal', 10, 2);
+            $table->integer('trans_gtotal');
             $table->enum("pembayaran", ["Cash", "Hutang", "Campur"]);
             $table->text('catatan')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_pelanggan')->references('id')->on('pelanggans')->onDelete('set null');
+            $table->foreign('trans_id_pelanggan')->references('id')->on('pelanggans')->onDelete('set null');
         });
     }
 
