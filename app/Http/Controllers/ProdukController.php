@@ -16,7 +16,14 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            "title" => "Produk",
+            'page' => 'Data Produk SireGas',
+            "produks" => Produk::All(),
+            'add' => $this->route . "create",
+            'index' => $this->route,
+        ];
+        return view($this->view . "data", $data);
     }
 
     /**
@@ -24,7 +31,14 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            "title" => "Produk",
+            'page' => 'Tambah Produk',
+            'save' => $this->route . "store",
+            'index' => $this->route,
+            // 'is_update' => false,
+        ];
+        return view($this->view . "form", $data);
     }
 
     /**
@@ -32,7 +46,9 @@ class ProdukController extends Controller
      */
     public function store(StoreProdukRequest $request)
     {
-        //
+        // dd($request);
+        Produk::create($request->all());
+        return redirect()->route($this->index);
     }
 
     /**
@@ -48,7 +64,15 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        $data = [
+            "title" => "Produk",
+            'page' => 'Edit Data Produk',
+            'produk' => $produk,
+            'save' => $this->route . "update",
+            'index' => $this->route,
+            'is_update' => true,
+        ];
+        return view($this->view . "form", $data);
     }
 
     /**
@@ -56,7 +80,9 @@ class ProdukController extends Controller
      */
     public function update(UpdateProdukRequest $request, Produk $produk)
     {
-        //
+        $produk->fill($request->all());
+        $produk->save();
+        return redirect()->route($this->index);
     }
 
     /**
@@ -64,6 +90,7 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        $produk->delete();
+        return redirect()->route($this->index);
     }
 }

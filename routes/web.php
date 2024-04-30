@@ -17,6 +17,8 @@ Route::group(["middleware" => "noLogin"], function () {
     Route::get("generateAkun", [AuthController::class, "generateAkun"]);
 });
 
+Route::get("/test", [TransaksiController::class, "test"]);
+
 Route::group(["middleware" => "isLogin"], function () {
 
     Route::get('/', function () {

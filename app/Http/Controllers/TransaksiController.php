@@ -43,6 +43,14 @@ class TransaksiController extends Controller
             // 'is_update' => false,
         ];
 
+        // $data = [
+        //     "title" => "Transaction",
+        //     "dtCat" => Category::All(),
+        //     "dtTable" => Table::All(),
+        //     "dtCus" => Customer::All(),
+        //     "dtMenu" => Menu::All()
+        // ];
+
         return view($this->view . "form", $data);
     }
 
@@ -96,5 +104,18 @@ class TransaksiController extends Controller
     {
         $transaksi->delete();
         return redirect()->route($this->index);
+    }
+
+    public function test()
+    {
+        $data = [
+            "title" => "Transaksi",
+            'page' => 'Data Transaksi',
+            "pelanggans" => Pelanggan::All(),
+            'transaksis' => Transaksi::All(),
+            'add' => $this->route . "create",
+            'index' => $this->route,
+        ];
+        return view($this->view . "pesan", $data);
     }
 }

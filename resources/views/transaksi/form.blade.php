@@ -69,6 +69,9 @@
                             <textarea class="form-control" placeholder="Catatan" id="catatan" name="catatan" style="height: 150px;"></textarea>
                             <label for="catatan">Catatan</label>
                         </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </div>
                 </div>
             </div>

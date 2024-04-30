@@ -16,23 +16,23 @@
         <div class="bg-light rounded p-4">
             <h6 class="mb-4">{{ @$page }}</h6>
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover`">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Tanggal Transaksi</th>
-                            <th scope="col">Total Harga</th>
-                            <th scope="col">Pembayaran</th>
+                            <th scope="col">Nama Produk</th>
+                            <th scope="col">Harga Produk</th>
+                            <th scope="col">Stok</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($transaksis as $item)
+                        @foreach ($produks as $item)
                             <tr>
                                 <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>jhon@email.com</td>
+                                <td>{{ @$item->nama }}</td>
+                                <td>{{ @$item->harga }}</td>
+                                <td>{{ @$item->stok }}</td>
                                 <td>
                                     <form action="{{ url($index . @$item->id) }}" method="post"
                                         id="{{ 'delete-form-' . @$item->id }}">
