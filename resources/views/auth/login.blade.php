@@ -96,7 +96,7 @@
                                 <input type="text" class="form-control" id="floatingInput" placeholder="username"
                                     autocomplete="chrome-off" name="username"
                                     class="form-control @error('email') is-invalid @enderror">
-                                <label for="floatingInput">Email address</label>
+                                <label for="floatingInput">Nama</label>
                                 @error('email')
                                     <div id="email" class="invalid-feedback">
                                         {{ $message }}

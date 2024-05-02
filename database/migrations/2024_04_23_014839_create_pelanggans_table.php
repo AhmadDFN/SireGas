@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
             $table->string('pelanggan_nama');
+            $table->string('pelanggan_nik');
             $table->string('pelanggan_alamat');
             $table->string('pelanggan_kota');
             $table->string('pelanggan_telp');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailTransaksiController;
@@ -32,6 +33,8 @@ Route::group(["middleware" => "isLogin"], function () {
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('produk', ProdukController::class);
     Route::resource('transaksi', TransaksiController::class);
+
+    Route::resource('user', AkunController::class);
 
     Route::get("auth/logout", [AuthController::class, "logout"])->name("signout");
 });

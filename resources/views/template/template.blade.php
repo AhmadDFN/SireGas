@@ -17,8 +17,12 @@
         <!-- Spinner Start -->
         <div id="spinner"
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+
+            {{--  Ganti Logo Besar  --}}
             <img src="{{ asset('dashmin/img/Logo.png') }}" alt="SireGas"
                 class="position-fixed translate-middle w-100 vh-100 top-50 start-50" style="opacity: 0.7;">
+            {{--  End Ganti Logo  --}}
+
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -57,7 +61,7 @@
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end" style="padding-right: 50px !important;">
                             <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a href="#">Kelompok Zada</a>
+                            Designed By <a href="#">Kelompok 4</a>
                         </div>
                     </div>
                 </div>
@@ -67,8 +71,6 @@
         <!-- Content End -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     @include('template.sc_footer')

@@ -54,15 +54,27 @@ class AuthController extends Controller
             $code .= $characters[rand(0, strlen($characters) - 1)];
         }
 
-        $User = User::create([
-            'username' => 'zada',
+        User::create([
+            'username' => 'pipit',
             'email_verified_at' => date("Y-m-d h:i:s"),
-            'password' => Hash::make('123'),
+            'password' => Hash::make('cantik'),
             'remember_token' => $code,
             'created_at' => date("Y-m-d h:i:s"),
             'updated_at' => date("Y-m-d h:i:s"),
         ]);
 
         return view('auth.login');
+    }
+
+    public function view()
+    {
+        Auth::logout();
+        return redirect('auth/login');
+    }
+
+    public function daftar()
+    {
+        Auth::logout();
+        return redirect('auth/login');
     }
 }

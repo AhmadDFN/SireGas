@@ -24,6 +24,7 @@ class DashboardController extends Controller
             'add' => $this->route . "create",
             'index' => $this->route,
         ];
-        return view($this->view . "data", $data);
+        // dd($data);
+        return view("dashboard", $data);
     }
 }

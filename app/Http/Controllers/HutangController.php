@@ -16,7 +16,11 @@ class HutangController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            "title" => "Produk",
+            'page' => 'Data Produk SireGas',
+        ];
+        return view($this->view . "data", $data);
     }
 
     /**

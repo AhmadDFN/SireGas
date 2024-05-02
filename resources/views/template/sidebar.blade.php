@@ -2,9 +2,12 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
         <a href="{{ url('/') }}" class="navbar-brand mx-4 mb-3">
-            {{--  <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>SireGas</h3>  --}}
+
+            {{--  Nama Dan Logo  --}}
             <h3 class="text-primary"><img class="rounded-circle" src="{{ asset('dashmin/img/Logo.png') }}" alt="SireGas"
                     style="width: 30px; height: 30px;margin-right: 10px;margin-top:-5px;">SireGas</h3>
+            {{--  End Nama dan Logo  --}}
+
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
             @if (@Auth::user()->username)
@@ -37,7 +40,8 @@
             @endif
         </div>
         <div class="navbar-nav w-100">
-            <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <a href="{{ url('/') }}" class="nav-item nav-link active"><i
+                    class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>Transaksi</a>
@@ -74,32 +78,32 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>Pembayaran</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ url('transaksi') }}" class="dropdown-item">Data</a>
-                    <a href="{{ url('transaksi/create') }}" class="dropdown-item">Tambah Data</a>
+                    <a href="{{ url('pembayaran') }}" class="dropdown-item">Data</a>
+                    <a href="{{ url('pembayaran/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>Pengadaan</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ url('transaksi') }}" class="dropdown-item">Data</a>
-                    <a href="{{ url('transaksi/create') }}" class="dropdown-item">Tambah Data</a>
+                    <a href="{{ url('pengadaan') }}" class="dropdown-item">Data</a>
+                    <a href="{{ url('pengadaan/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>Produk</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ url('transaksi') }}" class="dropdown-item">Data</a>
-                    <a href="{{ url('transaksi/create') }}" class="dropdown-item">Tambah Data</a>
+                    <a href="{{ url('produk') }}" class="dropdown-item">Data</a>
+                    <a href="{{ url('produk/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>Akun</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ url('transaksi') }}" class="dropdown-item">Data</a>
-                    <a href="{{ url('transaksi/create') }}" class="dropdown-item">Tambah Data</a>
+                    <a href="{{ url('user') }}" class="dropdown-item">Data</a>
+                    <a href="{{ url('user/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
         </div>
