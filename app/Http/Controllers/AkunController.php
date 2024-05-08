@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class AkunController extends Controller
 {
     protected $view = 'akun.';
-    protected $route = 'akun.';
+    protected $route = 'akun/';
 
     /**
      * Display a listing of the resource.

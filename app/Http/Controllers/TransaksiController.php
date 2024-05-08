@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use App\Models\Pelanggan;
 use App\Models\Transaksi;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreTransaksiRequest;
 use App\Http\Requests\UpdateTransaksiRequest;
 
@@ -11,7 +14,7 @@ class TransaksiController extends Controller
 {
 
     protected $index = 'transaksi.index';
-    protected $route = 'transaksi.';
+    protected $route = 'transaksi/';
     protected $view = 'transaksi.';
 
     /**
@@ -37,20 +40,13 @@ class TransaksiController extends Controller
     {
         $data = [
             "title" => "Transaksi",
-            'page' => 'Tambah Transaksi',
-            'save' => $this->route . "store",
+            'page' => 'Data Transaksi',
+            "pelanggans" => Pelanggan::All(),
+            'transaksis' => Transaksi::All(),
+            'produks' => Produk::All(),
+            'add' => $this->route . "create",
             'index' => $this->route,
-            // 'is_update' => false,
         ];
-
-        // $data = [
-        //     "title" => "Transaction",
-        //     "dtCat" => Category::All(),
-        //     "dtTable" => Table::All(),
-        //     "dtCus" => Customer::All(),
-        //     "dtMenu" => Menu::All()
-        // ];
-
         return view($this->view . "form", $data);
     }
 
@@ -59,6 +55,7 @@ class TransaksiController extends Controller
      */
     public function store(StoreTransaksiRequest $request)
     {
+        dd($request);
         Transaksi::create($request->all());
         return redirect()->route($this->index);
     }
@@ -106,6 +103,32 @@ class TransaksiController extends Controller
         return redirect()->route($this->index);
     }
 
+    function generate_nota(Request $req)
+    {
+        // Generate Data Menggunakan Query Builder
+        $transaksi = DB::table("transaksis")
+            ->join("pelanggans", "transaksis.trans_id_pelanggan", "=", "pelanggans.id")
+            ->select("transaksis.*", "pelanggans.nama")
+            ->where("transaksis.id", $req->id)
+            ->first();
+
+
+        $detail = DB::table("detail_transaksis")
+            ->join("produks", "detail_transaksis.id_menu", "=", "produks.id_menu")
+            ->select("detail_transaksis.*", "produks.nm_menu", DB::raw("(detail_transaksis.harga * detail_transaksis.jumlah) as subtotal"))
+            ->where("detail_transaksis.id_transaksi", $req->id)
+            ->get();
+
+        // Data to View
+        $data = [
+            "rsTransaksi" => $transaksi,
+            "rsDetail"    => $detail,
+            "total"       => 0,
+        ];
+
+        return view("transaksi.nota", $data);
+    }
+
     public function test()
     {
         $data = [
@@ -113,6 +136,7 @@ class TransaksiController extends Controller
             'page' => 'Data Transaksi',
             "pelanggans" => Pelanggan::All(),
             'transaksis' => Transaksi::All(),
+            'produks' => Produk::All(),
             'add' => $this->route . "create",
             'index' => $this->route,
         ];

@@ -17,6 +17,7 @@
 <script src="{{ asset('dashmin/js/datatables.min.js') }}"></script>
 <!-- Template Javascript -->
 <script src="{{ asset('dashmin/js/main.js') }}"></script>
+<script src="{{ asset('dashmin/js/custom.js') }}"></script>
 
 <script>
     function showToast(message, isSuccess) {

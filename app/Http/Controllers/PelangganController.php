@@ -9,7 +9,7 @@ use App\Http\Requests\UpdatePelangganRequest;
 class PelangganController extends Controller
 {
     protected $index = 'pelanggan.index';
-    protected $route = 'pelanggan.';
+    protected $route = 'pelanggan/';
     protected $view = 'pelanggan.';
     /**
      * Display a listing of the resource.
@@ -34,6 +34,7 @@ class PelangganController extends Controller
         $data = [
             "title" => "Pelanggan",
             'page' => 'Tambah Pelanggan',
+            "pelanggans" => Pelanggan::All(),
             'save' => $this->route . "store",
             'index' => $this->route,
             // 'is_update' => false,

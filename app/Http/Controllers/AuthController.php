@@ -13,7 +13,11 @@ class AuthController extends Controller
     // Metode untuk menampilkan formulir login
     public function showLoginForm()
     {
-        return view('auth.login');
+        $data = [
+            "title" => "Login",
+            "page" => "Login Page"
+        ];
+        return view('auth.login', $data);
     }
 
     // Metode untuk menangani permintaan login
@@ -55,15 +59,15 @@ class AuthController extends Controller
         }
 
         User::create([
-            'username' => 'pipit',
+            'username' => 'zada',
             'email_verified_at' => date("Y-m-d h:i:s"),
-            'password' => Hash::make('cantik'),
+            'password' => Hash::make('123'),
             'remember_token' => $code,
             'created_at' => date("Y-m-d h:i:s"),
             'updated_at' => date("Y-m-d h:i:s"),
         ]);
 
-        return view('auth.login');
+        return redirect('auth/login');
     }
 
     public function view()

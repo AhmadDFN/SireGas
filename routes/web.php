@@ -31,6 +31,7 @@ Route::group(["middleware" => "isLogin"], function () {
     Route::resource('pembayaran', PembayaranController::class);
     Route::resource('pengadaan', PengadaanController::class);
     Route::resource('transaksi', TransaksiController::class);
+    Route::get('transaksi/nota/{id?}', [TransaksiController::class, 'generate_nota']);
     Route::resource('produk', ProdukController::class);
     Route::resource('transaksi', TransaksiController::class);
 

@@ -20,19 +20,25 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Nota</th>
                             <th scope="col">Tanggal Transaksi</th>
+                            <th scope="col">Pelanggan</th>
                             <th scope="col">Total Harga</th>
                             <th scope="col">Pembayaran</th>
+                            <th scope="col">Catatan</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (@$transaksis as $item)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>jhon@email.com</td>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $item->trans_nota }}</td>
+                                <td>{{ $item->trans_tanggal }}</td>
+                                <td>{{ $item->trans_id_pelanggan }}</td>
+                                <td>{{ $item->trans_gtotal }}</td>
+                                <td>{{ $item->pembayaran }}</td>
+                                <td>{{ $item->catatan }}</td>
                                 <td>
                                     <form action="{{ url($index . @$item->id) }}" method="post"
                                         id="{{ 'delete-form-' . @$item->id }}">

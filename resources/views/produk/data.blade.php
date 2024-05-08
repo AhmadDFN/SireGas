@@ -19,7 +19,8 @@
                 <table class="table table-striped table-hover`">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">No</th>
+                            <th scope="col">Foto</th>
                             <th scope="col">Nama Produk</th>
                             <th scope="col">Harga Produk</th>
                             <th scope="col">Stok</th>
@@ -29,10 +30,20 @@
                     <tbody>
                         @foreach ($produks as $item)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>{{ @$item->nama }}</td>
-                                <td>{{ @$item->harga }}</td>
-                                <td>{{ @$item->stok }}</td>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>
+                                    @if ($item->produk_foto != '')
+                                        <img class="thumb-menu" src="{{ asset($item->produk_foto) }}"
+                                            alt="{{ $item->produk_nama }}">
+                                    @else
+                                        <img class="thumb-menu" src="{{ asset('dashmin/img/no-image.webp') }}"
+                                            alt="{{ $item->produk_nama }}">
+                                    @endif
+                                </td>
+                                <td>{{ @$item->produk_nama }}</td>
+                                <td>{{ @$item->produk_harga }}</td>
+                                <td style="color:{{ @$item->produk_stok >= 1 ? 'black' : 'red' }};">
+                                    {{ @$item->produk_stok }}</td>
                                 <td>
                                     <form action="{{ url($index . @$item->id) }}" method="post"
                                         id="{{ 'delete-form-' . @$item->id }}">

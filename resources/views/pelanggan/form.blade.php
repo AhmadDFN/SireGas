@@ -12,9 +12,9 @@
             </div>
         @endif
     </div>
-    <form action="{{ url('transaksi/' . @$transaksi->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('transaksi/' . @$pelanggan->id) }}" method="post" enctype="multipart/form-data">
         @csrf
-        @isset($transaksi)
+        @isset($pelanggan)
             @method('PUT')
         @endisset
         <style>
@@ -24,36 +24,37 @@
         </style>
         <div class="container-fluid pt-1 px-0">
             <div class="row g-4">
-                <div class="col-sm-12 col-xl-6">
+                <div class="col">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">{{ @$page }}</h6>
                         <div class="form-floating mb-3">
-                            <input type="hidden" name="id" value="{{ @$transaksi->id }}">
-                            <input type="date" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi"
-                                value="{{ @$transaksi->tanggal_transaksi }}">
-                            <label for="tanggal_transaksi" class="form-label">Tanggal Transaksi</label>
+                            <input type="hidden" name="id" value="{{ @$pelanggan->id }}">
+                            <input type="text" class="form-control" id="pelanggan_nama" name="pelanggan_nama"
+                                value="{{ @$pelanggan->pelanggan_nama }}">
+                            <label for="pelanggan_nama" class="form-label">Nama Pelanggan</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="dengan-rupiah" name="total_harga"
-                                value="{{ @$transaksi->total_harga }}">
-                            <label for="dengan-rupiah" class="form-label">Total Harga</label>
+                            <input type="text" class="form-control" id="pelanggan_nik" name="pelanggan_nik"
+                                value="{{ @$pelanggan->pelanggan_nik }}">
+                            <label for="pelanggan_nik" class="form-label">NIK</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
+                            <input type="text" class="form-control" id="pelanggan_alamat" name="pelanggan_alamat"
+                                value="{{ @$pelanggan->pelanggan_alamat }}">
+                            <label for="pelanggan_alamat" class="form-label">Alamat</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <label for="floatingSelect">Works with selects</label>
+                            <input type="text" class="form-control" id="pelanggan_kota" name="pelanggan_kota"
+                                value="{{ @$pelanggan->pelanggan_kota }}">
+                            <label for="pelanggan_kota" class="form-label">Kota</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;"></textarea>
-                            <label for="floatingTextarea">Comments</label>
+                            <input type="text" class="form-control" id="pelanggan_telp" name="pelanggan_telp"
+                                value="{{ @$pelanggan->pelanggan_telp }}">
+                            <label for="pelanggan_telp" class="form-label">No Telp</label>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ use App\Http\Requests\UpdatedetailTransaksiRequest;
 class DetailTransaksiController extends Controller
 {
     protected $index = 'detailTransaksi.index';
-    protected $route = 'detailTransaksi.';
+    protected $route = 'detailTransaksi/';
     protected $view = 'detailTransaksi.';
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class DetailTransaksiController extends Controller
     public function index()
     {
         $data = [
-            "title" => "Produk",
-            'page' => 'Data Produk SireGas',
+            "title" => "Detail Transaksi",
+            'page' => 'Data Detail Transaksi',
         ];
         return view($this->view . "data", $data);
     }

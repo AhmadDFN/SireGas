@@ -6,10 +6,10 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-    <title>@yield('title') | SireGas</title>
+    <title>{{ $page }} | SireGas</title>
 
     <!-- Favicon -->
-    <link href="{{ asset('dashmin/img/gasweb.ico') }}" rel="icon">
+    <link href="{{ asset('dashmin/img/Logo.png') }}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

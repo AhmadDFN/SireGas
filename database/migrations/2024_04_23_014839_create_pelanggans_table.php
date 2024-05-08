@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('pelanggan_alamat');
             $table->string('pelanggan_kota');
             $table->string('pelanggan_telp');
+            $table->integer('pelanggan_hutang');
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateHutangRequest;
 class HutangController extends Controller
 {
     protected $index = 'hutang.index';
-    protected $route = 'hutang.';
+    protected $route = 'hutang/';
     protected $view = 'hutang.';
     /**
      * Display a listing of the resource.

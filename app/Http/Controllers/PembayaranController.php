@@ -9,7 +9,7 @@ use App\Http\Requests\UpdatePembayaranRequest;
 class PembayaranController extends Controller
 {
     protected $index = 'pembayaran.index';
-    protected $route = 'pembayaran.';
+    protected $route = 'pembayaran/';
     protected $view = 'pembayaran.';
     /**
      * Display a listing of the resource.

@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use Dflydev\DotAccessData\Data;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
 
 class ProdukController extends Controller
 {
     protected $index = 'produk.index';
-    protected $route = 'produk.';
+    protected $route = 'produk/';
     protected $view = 'produk.';
     /**
      * Display a listing of the resource.
@@ -23,6 +26,7 @@ class ProdukController extends Controller
             'add' => $this->route . "create",
             'index' => $this->route,
         ];
+        // dd($data);
         return view($this->view . "data", $data);
     }
 
@@ -46,8 +50,18 @@ class ProdukController extends Controller
      */
     public function store(StoreProdukRequest $request)
     {
-        // dd($request);
-        Produk::create($request->all());
+        $namaData = str_replace(" ", "", $request->input("produk_nama"));
+        if ($request->file("foto")) {
+            $fileName = time() . "-" . $namaData . '.' . $request->file("foto")->extension();
+            $result = $request->file("foto")->move(public_path('uploads/produk/foto'), $fileName);
+            $foto = "uploads/produk/foto/" . $fileName;
+        } else {
+            $foto = $request->input("old_foto");
+        }
+        $requestData = $request->all();
+        $requestData["produk_foto"] = $foto;
+        // dd($requestData);
+        Produk::create($requestData);
         return redirect()->route($this->index);
     }
 
@@ -90,6 +104,10 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
+        $namePhoto = public_path($produk->foto);
+        if (File::exists($namePhoto)) {
+            File::delete($namePhoto);
+        }
         $produk->delete();
         return redirect()->route($this->index);
     }

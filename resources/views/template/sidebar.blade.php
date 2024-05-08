@@ -39,68 +39,69 @@
                 </div>
             @endif
         </div>
+
         <div class="navbar-nav w-100">
-            <a href="{{ url('/') }}" class="nav-item nav-link active"><i
+            <a href="{{ url('/') }}" class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Transaksi</a>
+                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Transaksi' ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Transaksi</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('transaksi') }}" class="dropdown-item">Data</a>
                     <a href="{{ url('transaksi/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Detail Transaksi</a>
+                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Detail Transaksi' ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Detail Transaksi</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('detailtransaksi') }}" class="dropdown-item">Data</a>
                     <a href="{{ url('detailtransaksi/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Hutang</a>
+                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Hutang' ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Hutang</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('hutang') }}" class="dropdown-item">Data</a>
                     <a href="{{ url('hutang/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Pelanggan</a>
+                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Pelanggan' ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pelanggan</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ url('transaksi') }}" class="dropdown-item">Data</a>
-                    <a href="{{ url('transaksi/create') }}" class="dropdown-item">Tambah Data</a>
+                    <a href="{{ url('pelanggan') }}" class="dropdown-item">Data</a>
+                    <a href="{{ url('pelanggan/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Pembayaran</a>
+                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Pembayaran' ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pembayaran</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('pembayaran') }}" class="dropdown-item">Data</a>
                     <a href="{{ url('pembayaran/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Pengadaan</a>
+                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Pengadaan' ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pengadaan</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('pengadaan') }}" class="dropdown-item">Data</a>
                     <a href="{{ url('pengadaan/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Produk</a>
+                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Produk' ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Produk</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('produk') }}" class="dropdown-item">Data</a>
                     <a href="{{ url('produk/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-laptop me-2"></i>Akun</a>
+                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Akun' ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Akun</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('user') }}" class="dropdown-item">Data</a>
                     <a href="{{ url('user/create') }}" class="dropdown-item">Tambah Data</a>

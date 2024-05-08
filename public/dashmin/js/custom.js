@@ -11,13 +11,10 @@ $(document).ready(function () {
 });
 
 // Pilih Customer
-function pilih_customer(id_cus, kd_cus, nm_cus) {
-    $("#member").html(nm_cus + " ( " + kd_cus + " )");
+function pilih_customer(id_cus, kota_cus, nm_cus) {
+    $("#member").html(nm_cus + " ( " + kota_cus + " )");
     $("#modal-customer").modal("hide");
     $("#txtCusID").val(id_cus);
-    var diskon = 1500;
-    $("#diskon").html("<span>Rp</span>" + number_format(diskon));
-    $("#txtDiskon").val(diskon);
 
     // Update Gtotal
     grandtotal();
@@ -106,7 +103,7 @@ function grandtotal() {
     });
 
     // Hitung Total setelah dapat Diskon
-    total = total - parseInt($("#txtDiskon").val());
+    // total = total - parseInt($("#txtDiskon").val());
 
     // PPN 11%
     ppn = (11 / 100) * total;
@@ -129,8 +126,8 @@ function number_format(x) {
 // Save Bill / Transaksi
 function save_transaksi() {
     // Validasi
-    if ($("#meja").val() == "") {
-        alert("Maaf Meja / Customer Belum dipilih !!!");
+    if ($("#catatan").val() == "") {
+        alert("Maaf catatan Belum diisi !!!");
         return;
     }
     if ($(".detail .detail-item").length == 0) {
@@ -177,12 +174,12 @@ function new_transaksi() {
     $(".detail").html("");
     $("#txtCusID").val("");
     $("#member").html("");
-    $("#meja").val("");
-    $("#txtDiskon").val(0);
+    $("#catatan").val("");
+    // $("#txtDiskon").val(0);
     $("#txtPPN").val(0);
     $("#gtotal").val(0);
 
-    $("#diskon").html("<span>Rp</span> 0");
+    // $("#diskon").html("<span>Rp</span> 0");
     $("#ppn").html("<span>Rp</span> 0");
     $("#amount").html("<span>Rp</span> 0");
 
@@ -190,6 +187,42 @@ function new_transaksi() {
     $("#btn-new").addClass("d-none");
 }
 
+//Searching transaksi
+function searching() {
+    var value = $("#search").val().toLowerCase();
+    $(".menu-list .menu-item").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+}
+
+$(document).ready(function () {
+    // Foto click
+    $("#photo-preview").click(function () {
+        $("#photo-input").click();
+    });
+
+    // Ketika file input change
+    $("#photo-input").change(function () {
+        setImage(this, "#photo-preview");
+    });
+});
+
+// Read Image
+function setImage(input, target) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        // Mengganti src dari object img#avatar
+        reader.onload = function (e) {
+            $(target).attr("src", e.target.result);
+            // $("#foto").val(e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// Searching
 //Searching transaksi
 function searching() {
     var value = $("#search").val().toLowerCase();
