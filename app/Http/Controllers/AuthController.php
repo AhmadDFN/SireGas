@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
+    protected $index = 'akun.index';
+    protected $route = 'akun/';
+    protected $view = 'akun.';
+
     // Metode untuk menampilkan formulir login
     public function showLoginForm()
     {
@@ -76,9 +80,9 @@ class AuthController extends Controller
         return redirect('auth/login');
     }
 
-    public function daftar()
+    public function daftar(Request $request)
     {
-        Auth::logout();
-        return redirect('auth/login');
+        User::create($request->all());
+        return redirect()->route($this->index);
     }
 }

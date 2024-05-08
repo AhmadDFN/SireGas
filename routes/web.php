@@ -35,7 +35,7 @@ Route::group(["middleware" => "isLogin"], function () {
     Route::resource('produk', ProdukController::class);
     Route::resource('transaksi', TransaksiController::class);
 
-    Route::resource('user', AkunController::class);
+    Route::resource('akun', AkunController::class);
 
     Route::get("auth/logout", [AuthController::class, "logout"])->name("signout");
 });

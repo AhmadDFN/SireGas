@@ -55,7 +55,7 @@ class TransaksiController extends Controller
      */
     public function store(StoreTransaksiRequest $request)
     {
-        dd($request);
+        // dd($request);
         Transaksi::create($request->all());
         return redirect()->route($this->index);
     }
