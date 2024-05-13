@@ -42,12 +42,10 @@
                                 <td>
                                     <form action="{{ url($index . @$item->id) }}" method="post"
                                         id="{{ 'delete-form-' . @$item->id }}">
-                                        <a href="{{ url($index . @$item->id . '/edit') }}"><i
-                                                class="text-warning fas fa-edit"></i></a>
-                                        <a href="{{ url($index . @$item->id) }}"><i
-                                                class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
+                                        <a href="{{ url($index . 'nota/' . @$item->id) }}"><i
+                                                class="text-success fas fa-eye"></i></a>
                                         <button type="submit" class="btn btn-transparent mt-0"><i
                                                 class="text-danger fas fa-trash"></i></button>
                                     </form>

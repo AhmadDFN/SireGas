@@ -12,7 +12,7 @@
             </div>
         @endif
     </div>
-    <form action="{{ url('transaksi/' . @$pelanggan->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('pelanggan/' . @$pelanggan->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @isset($pelanggan)
             @method('PUT')

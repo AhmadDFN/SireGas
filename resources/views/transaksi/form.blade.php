@@ -47,7 +47,7 @@
                 }
             </style>
             <!-- List Menu -->
-            <div class="menu-list px-2 mt-3">
+            <div class="menu-list px-2 mt-3" id="menulist">
                 <div class="row">
                     @foreach ($produks as $item)
                         <div class="menu-item col-md-3"
@@ -64,7 +64,7 @@
                                         ,-</span>
                                     | Stok ~
                                     <span
-                                        class="{{ ($item->produk_stok >= 11 ? 'text-dark' : $item->produk_stok >= 1) ? 'text-info' : 'text-danger' }}">{{ $item->produk_stok }}</span>
+                                        class="{{ $item->produk_stok >= 11 ? 'text-dark' : 'text-danger' }}">{{ $item->produk_stok }}</span>
                                 </h2>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                     <div class="row member">
                         <div class="col-md-10 text-light">
                             <p><strong>Member :</strong><br /><span id="member"></span></p>
-                            <input id="txtCusID" type="hidden" name="trans_cus_id">
+                            <input id="txtCusID" type="hidden" name="trans_id_pelanggan">
                         </div>
                         <div class="col-md-2" style="text-align: end" data-bs-toggle="modal"
                             data-bs-target="#modal-customer">
@@ -92,6 +92,15 @@
                     <p>
                         <input style="border: 2px solid rgb(0, 0, 0); width:100%;" type="text" name="catatan"
                             id="catatan" value="Catatan Belum Diisi">
+                    </p>
+                    <p>
+                        <select class="form-select" id="pembayaran" name="pembayaran"
+                            aria-label="Floating label select example" style="color: black">
+                            <option value="Cash">Cash</option>
+                            <option value="Hutang">Hutang</option>
+                            <option value="Campur">Campur</option>
+                        </select>
+                        <label for="trans_pembayaran" style="color: cyan">Pembayaran</label>
                     </p>
                     {{-- End Info Transaksi --}}
                     <hr style="border-top: 2px dashed rgb(255, 255, 255);">
@@ -123,7 +132,7 @@
                         <div class="col-md-6">
                             <button id="btn-save" class="btn text-light"
                                 style="background-color: rgb(130, 123, 0); border: 2px solid rgb(0, 0, 0);" type="button"
-                                onclick="save_transaksi()" data-url="{{ url('transaction/nota') }}">SIMPAN</button>
+                                onclick="save_transaksi()" data-url="{{ url('transaksi/nota') }}">SIMPAN</button>
                             <button id="btn-new" class="btn d-none text-light"
                                 style="background-color: rgb(3, 70, 12); border: 2px solid rgb(0, 0, 0);" type="button"
                                 onclick="new_transaksi()">TRANSAKSI BARU</button>
@@ -144,8 +153,8 @@
         <div class="row">
             <div class="item col-md-7">
                 <h4>Nasi Goreng</h4>
-                <p>Items :<input class="jumlah" name="jumlah[]" onchange="ganti_harga(this)" type="number" min="1"
-                        value="1" data-harga=""></p>
+                <p>Items :<input id="jumlah" class="jumlah" name="jumlah[]" onchange="ganti_harga(this)"
+                        type="number" min="1" value="1" data-harga=""></p>
                 {{-- Disimpan ke database --}}
                 <input type="hidden" name="id_menu[]" class="txtID">
                 <input type="hidden" name="nm_menu[]" class="txtNama">

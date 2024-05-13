@@ -11,10 +11,10 @@ $(document).ready(function () {
 });
 
 // Pilih Customer
-function pilih_customer(id_cus, kota_cus, nm_cus) {
-    $("#member").html(nm_cus + " ( " + kota_cus + " )");
+function pilih_customer(id_pelanggan, kota_pelanggan, nm_pelanggan) {
+    $("#member").html(nm_pelanggan + " ( " + kota_pelanggan + " )");
     $("#modal-customer").modal("hide");
-    $("#txtCusID").val(id_cus);
+    $("#txtCusID").val(id_pelanggan);
 
     // Update Gtotal
     grandtotal();
@@ -126,6 +126,10 @@ function number_format(x) {
 // Save Bill / Transaksi
 function save_transaksi() {
     // Validasi
+    if ($("#txtCusID").val() == "") {
+        alert("Maaf Pelanggan Belum Dipilih !!!");
+        return;
+    }
     if ($("#catatan").val() == "") {
         alert("Maaf catatan Belum diisi !!!");
         return;
@@ -150,7 +154,7 @@ function save_transaksi() {
 
             if (data.error == 0) {
                 // Proses Jika berhasil disimpan
-                //showMessage(data.type, data.message, "#transaksi");
+                // showMessage(data.type, data.message, "#transaksi");
                 alert(data.message);
 
                 // Cetak nota
@@ -174,7 +178,7 @@ function new_transaksi() {
     $(".detail").html("");
     $("#txtCusID").val("");
     $("#member").html("");
-    $("#catatan").val("");
+    $("#catatan").val("Catatan Belum Diisi");
     // $("#txtDiskon").val(0);
     $("#txtPPN").val(0);
     $("#gtotal").val(0);
@@ -185,6 +189,7 @@ function new_transaksi() {
 
     $("#btn-save").removeClass("d-none");
     $("#btn-new").addClass("d-none");
+    location.reload();
 }
 
 //Searching transaksi

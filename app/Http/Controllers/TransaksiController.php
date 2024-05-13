@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\Pelanggan;
 use App\Models\Transaksi;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTransaksiRequest;
 use App\Http\Requests\UpdateTransaksiRequest;
+use App\Models\detailTransaksi;
 
 class TransaksiController extends Controller
 {
@@ -49,15 +51,59 @@ class TransaksiController extends Controller
         ];
         return view($this->view . "form", $data);
     }
+    public function simpan()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreTransaksiRequest $request)
     {
-        // dd($request);
-        Transaksi::create($request->all());
-        return redirect()->route($this->index);
+        $nota = "N" . date("Ymdhis") . Str::upper(Str::random(4));
+
+        // Simpan Ke transaksi
+        Transaksi::create([
+            "trans_nota" => $nota,
+            "trans_tanggal" => date("Y-m-d h:i:s"),
+            "trans_id_pelanggan" => $request->input("trans_id_pelanggan") == null ? 0 : $request->input("trans_id_pelanggan"),
+            "trans_gtotal" => $request->input("gtotal"),
+            "trans_ppn" => $request->input("ppn"),
+            "pembayaran" => $request->input("pembayaran"),
+            "catatan" => $request->input("catatan"),
+        ]);
+
+        $transaksi = DB::select("SELECT seq FROM sqlite_sequence WHERE name = 'transaksis'");
+        $id_transaksi = $transaksi[0]->seq;
+
+        // Simpan Ke Detail
+        $mn_id = $request->input("id_menu");
+        $mn_harga = $request->input("harga");
+        $mn_jumlah = $request->input("jumlah");
+        for ($i = 0; $i < count($mn_id); $i++) {
+            // Proses Simpan
+            detailTransaksi::create([
+                "detail_id_transaksi" => $id_transaksi,
+                "detail_id_produk" =>  $mn_id[$i],
+                "detail_jumlah" =>  $mn_jumlah[$i],
+                "detail_harga" =>  $mn_harga[$i],
+                "detail_total_harga" =>  $request->input("gtotal"),
+            ]);
+            $product = Produk::find($mn_id[$i]);
+            $product->produk_stok -= $mn_jumlah[$i];
+            $product->save();
+        }
+
+
+
+        $data = [
+            "error" => 0,
+            "message" => "Data Berhasil Disimpan",
+            "id_transaksi" => $id_transaksi
+        ];
+
+        return json_encode($data);
     }
 
     /**
@@ -108,25 +154,25 @@ class TransaksiController extends Controller
         // Generate Data Menggunakan Query Builder
         $transaksi = DB::table("transaksis")
             ->join("pelanggans", "transaksis.trans_id_pelanggan", "=", "pelanggans.id")
-            ->select("transaksis.*", "pelanggans.nama")
+            ->select("transaksis.*", "pelanggans.pelanggan_nama")
             ->where("transaksis.id", $req->id)
             ->first();
 
 
         $detail = DB::table("detail_transaksis")
-            ->join("produks", "detail_transaksis.id_menu", "=", "produks.id_menu")
-            ->select("detail_transaksis.*", "produks.nm_menu", DB::raw("(detail_transaksis.harga * detail_transaksis.jumlah) as subtotal"))
-            ->where("detail_transaksis.id_transaksi", $req->id)
+            ->join("produks", "detail_transaksis.detail_id_produk", "=", "produks.id")
+            ->select("detail_transaksis.*", "produks.produk_nama", DB::raw("(detail_transaksis.detail_harga * detail_transaksis.detail_jumlah) as subtotal"))
+            ->where("detail_transaksis.detail_id_transaksi", $req->id)
             ->get();
 
         // Data to View
         $data = [
-            "rsTransaksi" => $transaksi,
-            "rsDetail"    => $detail,
+            "transaksi" => $transaksi,
+            "detail"    => $detail,
             "total"       => 0,
         ];
 
-        return view("transaksi.nota", $data);
+        return view($this->view . "nota", $data);
     }
 
     public function test()

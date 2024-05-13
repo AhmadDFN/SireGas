@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('trans_tanggal');
             $table->unsignedBigInteger('trans_id_pelanggan')->nullable();
             $table->integer('trans_gtotal');
+            $table->integer('trans_ppn');
             $table->enum("pembayaran", ["Cash", "Hutang", "Campur"]);
             $table->text('catatan')->nullable();
             $table->timestamps();

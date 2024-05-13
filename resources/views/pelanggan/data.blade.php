@@ -25,6 +25,7 @@
                             <th scope="col">Alamat</th>
                             <th scope="col">Kota</th>
                             <th scope="col">Telp</th>
+                            <th scope="col">Hutang</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -37,6 +38,7 @@
                                 <td>{{ $item->pelanggan_alamat }}</td>
                                 <td>{{ $item->pelanggan_kota }}</td>
                                 <td>{{ $item->pelanggan_telp }}</td>
+                                <td>{{ number_format($item->pelanggan_hutang, '0', ',', '.') }}</td>
                                 <td>
                                     <form action="{{ url($index . @$item->id) }}" method="post"
                                         id="{{ 'delete-form-' . @$item->id }}">

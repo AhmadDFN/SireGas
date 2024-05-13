@@ -48,7 +48,10 @@ class PelangganController extends Controller
      */
     public function store(StorePelangganRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['pelanggan_hutang'] = 0;
+        Pelanggan::create($data);
+        return redirect()->route($this->index);
     }
 
     /**
