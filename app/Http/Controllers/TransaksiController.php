@@ -67,12 +67,18 @@ class TransaksiController extends Controller
         Transaksi::create([
             "trans_nota" => $nota,
             "trans_tanggal" => date("Y-m-d h:i:s"),
-            "trans_id_pelanggan" => $request->input("trans_id_pelanggan") == null ? 0 : $request->input("trans_id_pelanggan"),
+            "trans_id_pelanggan" => $request->input("trans_id_pelanggan"),
             "trans_gtotal" => $request->input("gtotal"),
             "trans_ppn" => $request->input("ppn"),
             "pembayaran" => $request->input("pembayaran"),
             "catatan" => $request->input("catatan"),
         ]);
+
+        if ($request->input("pembayaran") == "Hutang") {
+            $pelanggan = Pelanggan::find($request->input("trans_id_pelanggan"));
+            $pelanggan->pelanggan_hutang += $request->input("gtotal");
+            $pelanggan->save();
+        }
 
         $transaksi = DB::select("SELECT seq FROM sqlite_sequence WHERE name = 'transaksis'");
         $id_transaksi = $transaksi[0]->seq;
@@ -90,12 +96,10 @@ class TransaksiController extends Controller
                 "detail_harga" =>  $mn_harga[$i],
                 "detail_total_harga" =>  $request->input("gtotal"),
             ]);
-            $product = Produk::find($mn_id[$i]);
-            $product->produk_stok -= $mn_jumlah[$i];
-            $product->save();
+            $produk = Produk::find($mn_id[$i]);
+            $produk->produk_stok -= $mn_jumlah[$i];
+            $produk->save();
         }
-
-
 
         $data = [
             "error" => 0,
@@ -171,7 +175,6 @@ class TransaksiController extends Controller
             "detail"    => $detail,
             "total"       => 0,
         ];
-
         return view($this->view . "nota", $data);
     }
 

@@ -41,7 +41,7 @@
                                     @endif
                                 </td>
                                 <td>{{ @$item->produk_nama }}</td>
-                                <td>{{ @$item->produk_harga }}</td>
+                                <td>{{ number_format($item->produk_harga, '0', ',', '.') }}</td>
                                 <td style="color:{{ @$item->produk_stok >= 1 ? 'black' : 'red' }};">
                                     {{ @$item->produk_stok }}</td>
                                 <td>

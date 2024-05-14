@@ -36,7 +36,7 @@
                                 <td>{{ $item->trans_nota }}</td>
                                 <td>{{ $item->trans_tanggal }}</td>
                                 <td>{{ $item->trans_id_pelanggan }}</td>
-                                <td>{{ $item->trans_gtotal }}</td>
+                                <td>{{ number_format($item->trans_gtotal, '0', ',', '.') }}</td>
                                 <td>{{ $item->pembayaran }}</td>
                                 <td>{{ $item->catatan }}</td>
                                 <td>

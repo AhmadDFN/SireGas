@@ -103,8 +103,8 @@
                 <a href="#" class="nav-link dropdown-toggle {{ $title == 'Akun' ? 'active' : '' }}"
                     data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Akun</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ url('user') }}" class="dropdown-item">Data</a>
-                    <a href="{{ url('user/create') }}" class="dropdown-item">Tambah Data</a>
+                    <a href="{{ url('akun') }}" class="dropdown-item">Data</a>
+                    <a href="{{ url('akun/create') }}" class="dropdown-item">Tambah Data</a>
                 </div>
             </div>
         </div>

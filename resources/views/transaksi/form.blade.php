@@ -98,7 +98,6 @@
                             aria-label="Floating label select example" style="color: black">
                             <option value="Cash">Cash</option>
                             <option value="Hutang">Hutang</option>
-                            <option value="Campur">Campur</option>
                         </select>
                         <label for="trans_pembayaran" style="color: cyan">Pembayaran</label>
                     </p>

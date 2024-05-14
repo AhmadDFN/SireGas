@@ -21,18 +21,12 @@ class AkunController extends Controller
             'index' => $this->route,
             'add' => $this->route . 'create',
         ];
-        if (@Auth::user()->role == "SuperAdmin") {
-            $users = User::all();
-        } else {
-            $exceptNames = ['Admin', 'SuperAdmin'];
-            $users = DB::table('users')
-                ->whereNotIn('role', $exceptNames)
-                ->orderBy('role', 'asc')
-                ->get();
-        }
+
+        $users = User::all();
+
         $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
+            "title" => "Akun",
+            'page' => 'Akun Account',
         ];
         $title = $data->title;
         return view($this->view . 'data', compact('users', 'routes', 'data', 'title'));
@@ -49,8 +43,8 @@ class AkunController extends Controller
             // 'is_update' => false,
         ];
         $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
+            "title" => "Akun",
+            'page' => 'Akun Account',
         ];
         $title = $data->title;
         return view($this->view . 'form', compact('routes', 'data', 'title'));
@@ -61,7 +55,20 @@ class AkunController extends Controller
      */
     public function store(Request $request)
     {
-        user::create($request->all());
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $code = '';
+
+        for ($i = 0; $i < 13; $i++) {
+            $code .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        $data = $request->all();
+        $data['email_verified_at'] = date("Y-m-d h:i:s");
+        $data['remember_token'] = $code;
+        $data['created_at'] = date("Y-m-d h:i:s");
+        $data['updated_at'] = date("Y-m-d h:i:s");
+
+        user::create($data);
         $mess = [
             "type" => "success",
             "text" => "Berhasil Dibuat."
@@ -72,66 +79,47 @@ class AkunController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(user $user)
+    public function show(user $akun)
     {
-        $mahasiswa = "";
-        $perusahaan = "";
-        $data = (object)[
-            'title' => $user->name,
-            'page' => "Profil user " . $user->name,
-        ];
-        $title = "User";
-
-        if ($user->role == "Mahasiswa") {
-            $mahasiswa = DB::table('users')
-                ->join('mahasiswas', 'users.reff', '=', 'mahasiswas.mhs_NIM')
-                ->select('users.*', 'mahasiswas.*')
-                ->where('mahasiswas.mhs_nim', '=', $user->reff)
-                ->get()->first();
-            $mahasiswa->password = null;
-            $mahasiswa->remember_token = null;
-        }
-
-        if ($user->role == "Perusahaan") {
-            $perusahaan = DB::table('users')
-                ->select('users.*',  'perusahaans.id as id_perusahaan', 'perusahaans.*')
-                ->join('perusahaans', 'users.reff', '=', 'perusahaans.id')
-                ->where('perusahaans.id', '=', $user->reff)
-                ->get()
-                ->first();
-            // dd($perusahaan);
-            $perusahaan->password = null;
-            $perusahaan->remember_token = null;
-        }
-        // dd($mahasiswa);
-        return view($this->view . 'show', compact('user', 'data', 'title', 'mahasiswa', 'perusahaan'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(user $user)
+    public function edit(User $akun)
     {
+        // dd($akun);
         $routes = (object)[
             'index' => $this->route,
-            'save' => $this->route . $user->id,
+            'save' => $this->route . $akun->id,
             'is_update' => true,
         ];
         $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
+            "title" => "Akun",
+            'page' => 'Akun Account',
         ];
         $title = $data->title;
-        return view($this->view . 'form', compact('user', 'routes', 'data', 'title'));
+        return view($this->view . 'form', compact('akun', 'routes', 'data', 'title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, user $user)
+    public function update(Request $request, user $akun)
     {
-        $user->fill($request->all());
-        $user->save();
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $code = '';
+
+        for ($i = 0; $i < 13; $i++) {
+            $code .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        $data = $request->all();
+        $data['updated_at'] = date("Y-m-d h:i:s");
+
+        $akun->fill($data);
+        $akun->save();
         $mess = [
             "type" => "success",
             "text" => "Berhasil Diperbarui."
@@ -142,9 +130,9 @@ class AkunController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user $user)
+    public function destroy(user $akun)
     {
-        $user->delete();
+        $akun->delete();
         $mess = [
             "type" => "success",
             "text" => "Berhasil Dihapus."
