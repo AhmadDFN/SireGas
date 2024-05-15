@@ -67,7 +67,16 @@ class PelangganController extends Controller
      */
     public function edit(Pelanggan $pelanggan)
     {
-        //
+        $data = [
+            "title" => "Pelanggan",
+            'page' => 'Edit Data Pelanggan',
+            'pelanggan' => $pelanggan,
+            'save' => $this->route . "update",
+            'index' => $this->route,
+            'is_update' => true,
+        ];
+
+        return view($this->view . "form", $data);
     }
 
     /**

@@ -25,13 +25,12 @@ Route::group(["middleware" => "isLogin"], function () {
 
     Route::get('/', [DashboardController::class, "index"])->name("dashboard");
 
-    Route::resource('detailtransaksi', DetailTransaksiController::class);
-    Route::resource('hutang', HutangController::class);
+    Route::resource('detailtransaksi', DetailTransaksiController::class)->only(['index']);
+    Route::get('detailhutang', [DetailTransaksiController::class, 'hutang']);
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('pembayaran', PembayaranController::class);
     Route::resource('pengadaan', PengadaanController::class);
     Route::resource('transaksi', TransaksiController::class);
-    // Route::post('transaksi/simpan', [TransaksiController::class, 'simpan']);
     Route::get('transaksi/nota/{id?}', [TransaksiController::class, 'generate_nota']);
     Route::resource('produk', ProdukController::class);
     Route::resource('transaksi', TransaksiController::class);

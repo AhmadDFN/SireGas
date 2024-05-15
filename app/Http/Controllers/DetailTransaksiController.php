@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\detailTransaksi;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoredetailTransaksiRequest;
 use App\Http\Requests\UpdatedetailTransaksiRequest;
 
@@ -16,13 +17,39 @@ class DetailTransaksiController extends Controller
      */
     public function index()
     {
+        $dtTrans = DB::table("transaksis")
+            ->leftJoin("pelanggans", "transaksis.trans_id_pelanggan", "=", "pelanggans.id")
+            ->select("transaksis.*", "pelanggans.pelanggan_nama")
+            ->get();
+
         $data = [
             "title" => "Detail Transaksi",
             'page' => 'Data Detail Transaksi',
+            "dtTrans" => $dtTrans,
+            "total" => 0,
+            "ppntotal" => 0
         ];
         return view($this->view . "data", $data);
     }
 
+    public function hutang()
+    {
+        $hutangs = DB::table("transaksis")
+            ->leftJoin("pelanggans", "transaksis.trans_id_pelanggan", "=", "pelanggans.id")
+            ->where("transaksis.pembayaran", "=", "Hutang")
+            ->select("transaksis.*", "pelanggans.pelanggan_nama")
+            ->get();
+
+        $data = [
+            "title" => "Detail hutang",
+            'page' => 'Data Detail hutang',
+            "hutangs" => $hutangs,
+            "total" => 0,
+            "ppntotal" => 0
+        ];
+
+        return view($this->view . "datahutang", $data);
+    }
     /**
      * Show the form for creating a new resource.
      */

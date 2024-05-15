@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hutang;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreHutangRequest;
 use App\Http\Requests\UpdateHutangRequest;
 
@@ -16,9 +17,15 @@ class HutangController extends Controller
      */
     public function index()
     {
+        $dtTrans = DB::table("transaksis")
+            ->leftJoin("pelanggans", "transaksis.trans_id_pelanggan", "=", "pelanggans.id")
+            ->select("transaksis.*", "pelanggans.pelanggan_nama")
+            ->get();
+
         $data = [
-            "title" => "Produk",
-            'page' => 'Data Produk SireGas',
+            "title" => "Detail Transaksi",
+            'page' => 'Data Detail Transaksi',
+            "dtTrans" => $dtTrans,
         ];
         return view($this->view . "data", $data);
     }

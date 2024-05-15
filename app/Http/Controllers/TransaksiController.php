@@ -191,4 +191,19 @@ class TransaksiController extends Controller
         ];
         return view($this->view . "pesan", $data);
     }
+
+    function rpt_transaction()
+    {
+        $dtTrans = DB::table("transaksis")
+            ->leftJoin("pelanggans", "transaksis.trans_id_pelanggan", "=", "pelanggans.id")
+            ->select("transaksis.*", "pelanggans.pelanggan_nama")
+            ->get();
+
+        $data = [
+            "dtTrans" => $dtTrans,
+            "total" => 0
+        ];
+
+        return view("detailtransaksi.data", $data);
+    }
 }

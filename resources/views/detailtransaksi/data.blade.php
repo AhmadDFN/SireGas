@@ -1,56 +1,132 @@
-@extends('template.template')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title', $title)
-@section('page-title', $page)
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Laporan Transaksi</title>
+    <style>
+        #header {
+            position: relative;
+            width: 100%;
+        }
 
-@section('content')
+        #header img {
+            width: 100px;
+        }
 
-    <div class="bg-secondary rounded">
-        @if (session('text'))
-            <div class="alert alert-{{ session('type') }} text-center" style="width: 300px;" role="alert">
-                {{ session('text') }}
-            </div>
-        @endif
-    </div>
-    <div class="col-12">
-        <div class="bg-light rounded p-4">
-            <h6 class="mb-4">{{ @$page }}</h6>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tanggal Transaksi</th>
-                            <th scope="col">Total Harga</th>
-                            <th scope="col">Pembayaran</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($transaksis as $item)
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>jhon@email.com</td>
-                                <td>
-                                    <form action="{{ url($index . @$item->id) }}" method="post"
-                                        id="{{ 'delete-form-' . @$item->id }}">
-                                        <a href="{{ url($index . @$item->id . '/edit') }}"><i
-                                                class="text-warning fas fa-edit"></i></a>
-                                        <a href="{{ url($index . @$item->id) }}"><i
-                                                class="text-success fas fa-eye"></i></a><br>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
-                                                class="text-danger fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-@endsection
+        #header h2 {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-size: 25px;
+            font-family: "Arial";
+        }
+
+        #header p {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            font-family: "Arial";
+        }
+
+        h3 {
+            position: relative;
+            text-align: center;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            margin: 5px 0;
+            padding: 10px 0;
+            font-family: "Arial";
+            text-transform: uppercase;
+        }
+
+        #dtTrans {
+            position: relative;
+            border: 1px solid #000;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #dtTrans thead {
+            background: rgb(52, 49, 255);
+        }
+
+        #dtTrans thead th {
+            padding: 10px;
+            text-align: center;
+            font-family: "Arial";
+            border-collapse: collapse;
+        }
+
+        #dtTrans tbody td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+            font-family: "Arial";
+            border-collapse: collapse;
+        }
+
+        #dtTrans tfoot td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+            font-size: 22px;
+            font-family: "Arial";
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="header">
+        <tr>
+            <td width="5%"><img src="{{ asset('dashmin/img/Logo.png') }}" alt=""></td>
+            <td>
+                <h2>SireGas</h2>
+                <p>JL in aja dulu no 1 Kota Semarang</p>
+                <a href="{{ url('/') }}">Home</a>
+            </td>
+        </tr>
+    </table>
+    <h3>Laporan Transaksi</h3>
+    <table id="dtTrans" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nota</th>
+                <th>Tanggal</th>
+                <th>Pelanggan</th>
+                <th>Pembayaran</th>
+                <th>Ppn 11%</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($dtTrans as $rsTrans)
+                <tr>
+                    <td>{{ $rsTrans->trans_nota }}</td>
+                    <td>{{ $rsTrans->trans_tanggal }}</td>
+                    <td>{{ $rsTrans->pelanggan_nama }}</td>
+                    <td>{{ $rsTrans->pembayaran }}</td>
+                    <td style="text-align: right;">{{ number_format($rsTrans->trans_ppn, 0, ',', '.') }}</td>
+                    <td style="text-align: right;">{{ number_format($rsTrans->trans_gtotal, 0, ',', '.') }}</td>
+                </tr>
+                @php
+                    $ppntotal += $rsTrans->trans_ppn;
+                    $total += $rsTrans->trans_gtotal;
+                @endphp
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4"><strong>Grand Total :</strong></td>
+                <td style="text-align: right;">{{ number_format($ppntotal, 0, ',', '.') }}</td>
+                <td style="text-align: right;">{{ number_format($total, 0, ',', '.') }}</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+
+</html>

@@ -16,7 +16,7 @@
         <div class="bg-light rounded p-4">
             <h6 class="mb-4">{{ @$page }}</h6>
             <div class="table-responsive">
-                <table class="table table-striped table-hover`">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th scope="col">No</th>

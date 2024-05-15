@@ -53,18 +53,10 @@
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle {{ $title == 'Detail Transaksi' ? 'active' : '' }}"
-                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Detail Transaksi</a>
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Laporan</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ url('detailtransaksi') }}" class="dropdown-item">Data</a>
-                    <a href="{{ url('detailtransaksi/create') }}" class="dropdown-item">Tambah Data</a>
-                </div>
-            </div>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle {{ $title == 'Hutang' ? 'active' : '' }}"
-                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Hutang</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ url('hutang') }}" class="dropdown-item">Data</a>
-                    <a href="{{ url('hutang/create') }}" class="dropdown-item">Tambah Data</a>
+                    <a href="{{ url('detailtransaksi') }}" class="dropdown-item" target="blank_">Detail Transaksi</a>
+                    <a href="{{ url('detailhutang') }}" class="dropdown-item">Detail Hutang</a>
                 </div>
             </div>
             <div class="nav-item dropdown">

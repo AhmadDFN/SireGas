@@ -44,7 +44,7 @@
                                         id="{{ 'delete-form-' . @$item->id }}">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ url($index . 'nota/' . @$item->id) }}"><i
+                                        <a href="{{ url($index . 'nota/' . @$item->id) }}" target="blank_"><i
                                                 class="text-success fas fa-eye"></i></a>
                                         <button type="submit" class="btn btn-transparent mt-0"><i
                                                 class="text-danger fas fa-trash"></i></button>
