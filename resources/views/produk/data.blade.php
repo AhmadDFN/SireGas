@@ -49,8 +49,6 @@
                                         id="{{ 'delete-form-' . @$item->id }}">
                                         <a href="{{ url($index . @$item->id . '/edit') }}"><i
                                                 class="text-warning fas fa-edit"></i></a>
-                                        <a href="{{ url($index . @$item->id) }}"><i
-                                                class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent mt-0"><i
