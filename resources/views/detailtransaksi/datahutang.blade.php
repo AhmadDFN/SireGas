@@ -12,6 +12,7 @@
             </div>
         @endif
     </div>
+    {{--  @dd($title)  --}}
     <div class="col-12">
         <div class="bg-light rounded p-4">
             <h6 class="mb-4">{{ @$page }}</h6>

@@ -28,7 +28,8 @@ Route::group(["middleware" => "isLogin"], function () {
     Route::resource('detailtransaksi', DetailTransaksiController::class)->only(['index']);
     Route::get('detailhutang', [DetailTransaksiController::class, 'hutang']);
     Route::resource('pelanggan', PelangganController::class);
-    Route::resource('pembayaran', PembayaranController::class);
+    Route::get('pembayaran/create/{pelanggan_id?}', [PembayaranController::class, 'create']);
+    Route::resource('pembayaran', PembayaranController::class)->except('create');
     Route::resource('pengadaan', PengadaanController::class);
     Route::resource('transaksi', TransaksiController::class);
     Route::get('transaksi/nota/{id?}', [TransaksiController::class, 'generate_nota']);

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer("pengadaan_jumlah");
             $table->integer("pengadaan_harga");
             $table->integer("pengadaan_total");
-            $table->string("pengadaan_catatan");
+            $table->string("pengadaan_catatan")->nullable();
             $table->timestamps();
         });
     }

@@ -108,6 +108,7 @@ class ProdukController extends Controller
         if (File::exists($namePhoto)) {
             File::delete($namePhoto);
         }
+
         $produk->delete();
         return redirect()->route($this->index);
     }

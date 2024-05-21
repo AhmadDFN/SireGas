@@ -20,32 +20,18 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Tanggal Transaksi</th>
-                            <th scope="col">Total Harga</th>
-                            <th scope="col">Pembayaran</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Tanggal Pembayaran</th>
+                            <th scope="col">Total Bayar</th>
+                            <th scope="col">Pelanggan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pembayarans as $item)
+                        @foreach (@$pembayarans as $item)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>jhon@email.com</td>
-                                <td>
-                                    <form action="{{ url($index . @$item->id) }}" method="post"
-                                        id="{{ 'delete-form-' . @$item->id }}">
-                                        <a href="{{ url($index . @$item->id . '/edit') }}"><i
-                                                class="text-warning fas fa-edit"></i></a>
-                                        <a href="{{ url($index . @$item->id) }}"><i
-                                                class="text-success fas fa-eye"></i></a><br>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
-                                                class="text-danger fas fa-trash"></i></button>
-                                    </form>
-                                </td>
+                                <th scope="row">{{ @$loop->iteration }}</th>
+                                <td>{{ @$item->pembayaran_tanggal }}</td>
+                                <td>{{ number_format($item->pembayaran_jumlah, '0', ',', '.') }}</td>
+                                <td>{{ @$item->pelanggan->pelanggan_nama }}</td>
                             </tr>
                         @endforeach
                     </tbody>

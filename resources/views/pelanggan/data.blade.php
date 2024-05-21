@@ -44,6 +44,8 @@
                                         id="{{ 'delete-form-' . @$item->id }}">
                                         <a href="{{ url($index . @$item->id . '/edit') }}"><i
                                                 class="text-warning fas fa-edit"></i></a>
+                                        <a href="{{ url('pembayaran/create/' . @$item->id) }}"><i
+                                                class="ms-2 text-info fa-solid fa-dollar-sign"></i></a><br>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent mt-0"><i

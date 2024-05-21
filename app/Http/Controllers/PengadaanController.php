@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengadaan;
 use App\Http\Requests\StorePengadaanRequest;
 use App\Http\Requests\UpdatePengadaanRequest;
+use App\Models\Produk;
 
 class PengadaanController extends Controller
 {
@@ -16,10 +17,16 @@ class PengadaanController extends Controller
      */
     public function index()
     {
+        $pengadaans = Pengadaan::with('produk')->get();
+        // dd($pengadaans);
         $data = [
-            "title" => "Produk",
-            'page' => 'Data Produk SireGas',
+            "title" => "Pengadaan",
+            'page' => 'Data Pengadaan SireGas',
+            "pengadaans" => $pengadaans,
+            'add' => $this->route . "create",
+            'index' => $this->route,
         ];
+        // dd($data);
         return view($this->view . "data", $data);
     }
 
@@ -28,7 +35,15 @@ class PengadaanController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            "title" => "Pengadaan",
+            'page' => 'Tambah Pengadaan',
+            'save' => $this->route . "store",
+            'index' => $this->route,
+            'produks' => Produk::all(),
+            // 'is_update' => false,
+        ];
+        return view($this->view . "form", $data);
     }
 
     /**
@@ -36,7 +51,17 @@ class PengadaanController extends Controller
      */
     public function store(StorePengadaanRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['pengadaan_tanggal'] = date("Y-m-d h:i:s");
+        $data['pengadaan_total'] = $request->pengadaan_jumlah * $request->pengadaan_harga;
+        // dd($data);
+        Pengadaan::create($data);
+        // Update Produk Stok
+        $produk = Produk::find($request->pengadaan_id_produk);
+        $produk->produk_stok += $request->pengadaan_jumlah;
+        $produk->save();
+
+        return redirect()->route($this->index);
     }
 
     /**

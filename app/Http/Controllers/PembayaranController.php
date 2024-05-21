@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembayaran;
 use App\Http\Requests\StorePembayaranRequest;
 use App\Http\Requests\UpdatePembayaranRequest;
+use App\Models\Pelanggan;
 
 class PembayaranController extends Controller
 {
@@ -16,9 +17,13 @@ class PembayaranController extends Controller
      */
     public function index()
     {
+        $pembayarans = Pembayaran::with('pelanggan')->get();
         $data = [
-            "title" => "Produk",
-            'page' => 'Data Produk SireGas',
+            "title" => "Pembayaran",
+            'page' => 'Data Pembayaran hutang',
+            "pembayarans" => $pembayarans,
+            'add' => $this->route . "create",
+            'index' => $this->route,
         ];
         return view($this->view . "data", $data);
     }
@@ -26,9 +31,19 @@ class PembayaranController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id_pelanggan = NULL)
     {
-        //
+        $data = [
+            "idPelanggan" => $id_pelanggan,
+            "title" => "Pembayaran",
+            'page' => 'Tambah Pembayaran',
+            'save' => $this->route . "store",
+            'index' => $this->route,
+            'pelanggans' => Pelanggan::all(),
+            // 'is_update' => false,
+        ];
+        // dd($data);
+        return view($this->view . "form", $data);
     }
 
     /**
@@ -36,7 +51,18 @@ class PembayaranController extends Controller
      */
     public function store(StorePembayaranRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['pembayaran_tanggal'] = date("Y-m-d h:i:s");
+        // Update Produk Stok
+        $pelanggan = Pelanggan::find($request->pembayaran_id_pelanggan);
+        if ($pelanggan->pelanggan_hutang < $request->pembayaran_jumlah) {
+            return back()->with(['text' => "Pembayaran melebihi hutang"]);
+        }
+        $pelanggan->pelanggan_hutang -= $request->pembayaran_jumlah;
+        $pelanggan->save();
+        Pembayaran::create($data);
+
+        return redirect()->route($this->index);
     }
 
     /**
