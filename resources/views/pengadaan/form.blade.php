@@ -30,7 +30,7 @@
                                 @foreach ($produks as $item)
                                     <option
                                         value="{{ @$item->id }}"{{ @$item->id == @$pengadaan->pengadaan_id_produk ? 'Selected' : '' }}>
-                                        {{ @$item->produk_nama }}</option>
+                                        {{ @$item->produk_nama . ' - Harga Jual - ' . @$item->produk_harga }}</option>
                                 @endforeach
                             </select>
                             <label for="pengadaan_id_produk">Pengadaan Produk</label>
@@ -43,7 +43,7 @@
                         <div class="form-floating mb-3">
                             <input type="number" class="form-control" id="pengadaan_harga" name="pengadaan_harga"
                                 value="{{ @$pengadaan->pengadaan_harga }}">
-                            <label for="pengadaan_harga" class="form-label">Harga</label>
+                            <label for="pengadaan_harga" class="form-label">Harga Beli</label>
                         </div>
                         <div class="form-floating mb-3">
                             <textarea class="form-control" placeholder="Catatan Disini" name="pengadaan_catatan" id="pengadaan_catatan"
