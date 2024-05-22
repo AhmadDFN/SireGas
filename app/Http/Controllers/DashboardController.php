@@ -31,7 +31,7 @@ class DashboardController extends Controller
         $rev_day = DB::select("SELECT SUM(trans_gtotal - trans_ppn) AS total
                     FROM transaksis
                     WHERE strftime('%Y-%m-%d', trans_tanggal) = date('now')");
-        $hutang = DB::select("SELECT SUM(trans_gtotal) AS total FROM transaksis WHERE pembayaran='Hutang'");
+        $hutang = DB::select("SELECT SUM(pelanggan_hutang) AS total FROM pelanggans");
 
         $data = [
             "total_user" => User::count(),
