@@ -31,7 +31,7 @@ class PembayaranController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id_pelanggan = NULL)
+    public function create($id_pelanggan = [])
     {
         $data = [
             "idPelanggan" => $id_pelanggan,
